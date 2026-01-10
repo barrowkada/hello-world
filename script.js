@@ -157,28 +157,45 @@ const pokemon = [
 const generateBtn = document.getElementById('generate-btn');
 const pokemonNameEl = document.getElementById('pokemon-name');
 const pokemonNumberEl = document.getElementById('pokemon-number');
+const pokemonWheel = document.getElementById('pokemon-wheel');
 
-// Function to generate random Pokémon
-function generateRandomPokemon() {
+let isSpinning = false;
+
+// Function to spin the wheel and generate random Pokémon
+function spinWheel() {
+    if (isSpinning) return;
+
+    isSpinning = true;
+    generateBtn.disabled = true;
+
+    // Add spinning class to wheel
+    pokemonWheel.classList.add('spinning');
+
+    // Generate random Pokémon
     const randomIndex = Math.floor(Math.random() * pokemon.length);
     const randomPokemon = pokemon[randomIndex];
     const pokemonNumber = randomIndex + 1; // Pokédex number (1-indexed)
 
-    // Add animation effect
-    const card = document.getElementById('pokemon-display');
-    card.style.transform = 'scale(0.95)';
-
+    // Wait for spin animation to complete (2 seconds)
     setTimeout(() => {
-        pokemonNameEl.textContent = randomPokemon;
-        pokemonNumberEl.textContent = `#${pokemonNumber.toString().padStart(3, '0')}`;
-        card.style.transform = 'scale(1)';
-    }, 100);
+        // Remove spinning class
+        pokemonWheel.classList.remove('spinning');
+
+        // Show the result with animation
+        const card = document.getElementById('pokemon-display');
+        card.style.transform = 'scale(0.95)';
+
+        setTimeout(() => {
+            pokemonNameEl.textContent = randomPokemon;
+            pokemonNumberEl.textContent = `#${pokemonNumber.toString().padStart(3, '0')}`;
+            card.style.transform = 'scale(1)';
+
+            // Re-enable button
+            isSpinning = false;
+            generateBtn.disabled = false;
+        }, 200);
+    }, 2000);
 }
 
 // Event listener for button click
-generateBtn.addEventListener('click', generateRandomPokemon);
-
-// Optional: Generate a Pokémon on page load
-window.addEventListener('load', () => {
-    generateRandomPokemon();
-});
+generateBtn.addEventListener('click', spinWheel);

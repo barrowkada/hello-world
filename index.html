@@ -11,12 +11,20 @@
         <h1>Random Pokémon Generator</h1>
         <p class="subtitle">Original 151 Pokémon</p>
 
-        <div id="pokemon-display" class="pokemon-card">
-            <div class="pokemon-number" id="pokemon-number">???</div>
-            <div class="pokemon-name" id="pokemon-name">Click the button to generate!</div>
+        <div class="wheel-container">
+            <div id="pokemon-wheel" class="pokemon-wheel">
+                <div class="wheel-inner">
+                    <div class="pokeball"></div>
+                </div>
+            </div>
         </div>
 
-        <button id="generate-btn" class="generate-btn">Generate Random Pokémon</button>
+        <div id="pokemon-display" class="pokemon-card">
+            <div class="pokemon-number" id="pokemon-number">???</div>
+            <div class="pokemon-name" id="pokemon-name">Spin the wheel!</div>
+        </div>
+
+        <button id="generate-btn" class="generate-btn">Spin the Wheel!</button>
 
         <div class="stats">
             <p>Total Pokémon: <span id="total-count">151</span></p>
